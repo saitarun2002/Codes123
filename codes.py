@@ -89,7 +89,71 @@ modifiedMessage=c.decode()
 print (modifiedMessage)
 clientSocket.close()
 
+#!
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
+import java.util.Scanner;
 
+public class Client1 {
+    public static void main(String[] args) {
+
+        System.out.println("I am client");
+try {
+    Socket client =new Socket("localhost", 5003);
+
+    DataInputStream cdi = new DataInputStream(client.getInputStream());
+    DataOutputStream cdo = new DataOutputStream(client.getOutputStream());
+
+    String input = (String)cdi.readUTF();
+
+System.out.println("Server Message" +input);
+
+//Scanner sc =new Scanner(System.in);
+
+//String output = sc.nextLine();
+
+//cdo.writeUTF(output);
+//cdo.flush();
+
+} catch (Exception e) {
+    //TODO: handle exception
+}
+        
+    }
+}
+
+
+#
+import java.net.*;
+import java.io.*;
+import java.util.*;
+public class Server1 {
+public static void main(String[] args) {
+    try {
+        System.out.println("I am a server");
+        ServerSocket ss = new ServerSocket(5003);
+
+        Socket client=ss.accept();
+
+        DataInputStream cdi = new DataInputStream(client.getInputStream());
+    DataOutputStream cdo = new DataOutputStream(client.getOutputStream());
+
+//    String input = (String)cdi.readUTF();
+
+//System.out.println("Server Message" +input);
+
+Scanner sc =new Scanner(System.in);
+
+String output = sc.nextLine();
+
+cdo.writeUTF(output);
+cdo.flush();
+    } catch (Exception e) {
+        //TODO: handle exception
+    }
+}
+}
 
 
 
